@@ -36,10 +36,5 @@ export default defineNuxtConfig({
     },
   },
 
-  components: [
-    // ~/calendar-module/components/event/Update.vue => <EventUpdate />
-    { path: "~/src/components", pathPrefix: false },
-
-    "~/components",
-  ],
+  components: [{ path: "~/src/components", pathPrefix: false }, "~/components"],
 });

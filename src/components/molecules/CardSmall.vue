@@ -1,4 +1,3 @@
-<!-- components/molecules/CardSmall.vue -->
 <template>
   <article class="card card-small">
     <h4 class="small-title">{{ article.title }}</h4>
@@ -32,9 +31,6 @@ defineProps({
     margin-top: 0.25rem;
     font-size: 0.85rem;
     color: $color-text-primary;
-    &:hover {
-      text-decoration: underline;
-    }
   }
 }
 </style>

@@ -1,7 +1,15 @@
-<!-- components/organisms/HeroSection.vue -->
+<script setup lang="ts">
+const { data: news } = await useAsyncData("news", () => {
+  return queryCollection("news").all();
+});
+const leftArticles = computed(() => news.value?.slice(0, 3) ?? []);
+const mainArticle = computed(() => news.value?.[3] || null);
+const rightArticles = computed(() => news.value?.slice(4) ?? []);
+</script>
+
 <template>
-  <section class="hero-section container">
-    <div class="hero-grid">
+  <section class="hero-section">
+    <div class="hero-grid container">
       <!-- Left Column: 3 Large Articles -->
       <div class="left-column">
         <CardLarge
@@ -28,63 +36,13 @@
   </section>
 </template>
 
-<script setup lang="ts">
-const leftArticles = ref([
-  {
-    title: "Left Article 1",
-    description: "This is a longer description for the first left article.",
-    image: "/images/data.png",
-    path: "/news/article-1",
-  },
-  {
-    title: "Left Article 2",
-    description: "Another description text goes here.",
-    image: "/images/data.png",
-    path: "/news/article-2",
-  },
-  {
-    title: "Left Article 3",
-    description: "Yet another article in the left column.",
-    image: "/images/data.png",
-
-    path: "/news/article-3",
-  },
-]);
-
-const mainArticle = ref({
-  title: "Main Feature: Helicopter Crash in NY",
-  description: "Details about the accident, rescue updates, and more.",
-  image: "/images/data.png",
-
-  path: "/news/main-article",
-});
-
-const rightArticles = ref([
-  {
-    title: "Headline: Breaking News",
-    description: "Short summary for the right column article.",
-    path: "/news/article-4",
-  },
-  {
-    title: "Headline: Market Crash",
-    description: "Stock markets tumble after major announcements.",
-    path: "/news/article-5",
-  },
-  {
-    title: "Headline: Technology Updates",
-    description: "Latest trends in the tech world.",
-    path: "/news/article-6",
-  },
-]);
-</script>
-
 <style scoped lang="scss">
 .hero-section {
   padding: 2rem 0;
 
   .hero-grid {
     display: grid;
-    grid-template-columns: 2fr 3fr 2fr; /* Adjust the ratio as needed */
+    grid-template-columns: 2fr 3fr 2fr;
     gap: 1.5rem;
 
     .left-column,
@@ -97,7 +55,7 @@ const rightArticles = ref([
 
   @media screen and (max-width: 768px) {
     .hero-grid {
-      grid-template-columns: 1fr; /* Stack all columns on smaller screens */
+      grid-template-columns: 1fr;
     }
 
     .left-column,
@@ -109,7 +67,5 @@ const rightArticles = ref([
       flex-wrap: wrap;
     }
   }
-
-  // Responsive layout
 }
 </style>

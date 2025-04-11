@@ -1,52 +1,49 @@
-/* Global container class */
-@use "~/assets/scss/_variables.scss" as *;
-.container {
+@use "~/assets/scss/_variables.scss" as vars;
+@use "~/assets/scss/_mixins.scss" as mixins;
+
+
+*, *::before, *::after {
   box-sizing: border-box;
-  padding-left: 15px;
-  padding-right: 15px;
+}
+
+body {
+  margin: 0;
+  font-family: sans-serif; 
+  color: vars.$color-text-primary;
+  background-color: vars.$color-white;
+  line-height: 1.6;
+}
+
+.container {
+  padding-left: vars.$space-sm;
+  padding-right: vars.$space-sm;
   margin-left: auto;
   margin-right: auto;
-  width: 100%; /* Default width for extra small (<576px) is 100% */
-  max-width: 100%; /* Ensures container never exceeds viewport width */
+  width: 100%;
+  max-width: 100%;
 }
 
-@media (max-width: 577px) {
-  .container {
-    width: 100%;
-    padding-left: 10px; /* Reduced padding for smaller screens */
-    padding-right: 10px;
-  }
-}
-
-@media (min-width: 576px) {
+@media (min-width: vars.$breakpoint-xs) {
   .container {
     width: 540px;
   }
 }
-
-/* Medium devices (≥768px) */
-@media (min-width: 768px) {
+@media (min-width: vars.$breakpoint-md) {
   .container {
     width: 720px;
   }
 }
-
-/* Large devices (≥992px) */
-@media (min-width: 992px) {
+@media (min-width: vars.$breakpoint-lg) {
   .container {
     width: 960px;
   }
 }
-
-/* X-Large devices (≥1200px) */
-@media (min-width: 1200px) {
+@media (min-width: vars.$breakpoint-xl) {
   .container {
     width: 1140px;
   }
 }
-
-/* XX-Large devices (≥1400px) */
-@media (min-width: 1400px) {
+@media (min-width: vars.$breakpoint-2xl) {
   .container {
     width: 1320px;
   }

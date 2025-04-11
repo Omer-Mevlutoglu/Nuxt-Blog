@@ -1,24 +1,27 @@
-// assets/scss/_variables.scss
+
 
 // Colors
 $color-white: #fff;
+$color-primary: #007bff;
 $color-border: #eee;
 $color-text-primary: #333;
 $color-text-secondary: #555;
 $color-text-hover: #000;
 
 // Spacing
-$header-padding: 15px 0;
+$space-xs: 8px;
+$space-sm: 15px;
+$space-md: 20px;
+$header-padding: 30px 0;  
 $nav-gap: 20px;
 
-// Typography
+// Text
 $font-size-logo: 1.5rem;
 $font-weight-logo: bold;
 
-$color-white: #fff;
-$color-primary: #007bff;
-$color-text-primary: #333;
-$color-text-secondary: #555;
-
-// Spacing (if needed)
-$header-padding: 60px 0;
+// Breakpoints
+$breakpoint-xs: 576px;   
+$breakpoint-md: 768px;   
+$breakpoint-lg: 992px; 
+$breakpoint-xl: 1200px; 
+$breakpoint-2xl: 1400px;
