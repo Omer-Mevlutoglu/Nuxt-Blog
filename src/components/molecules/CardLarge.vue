@@ -6,13 +6,19 @@
         :src="article.image"
         :alt="article.title"
         class="card-img"
-      />
+      >
       <div class="image-overlay" />
     </div>
     <div class="card-content">
       <h3 class="card-title">{{ article.title }}</h3>
       <p class="card-description">{{ article.description }}</p>
-      <NuxtLink :to="article.path" class="card-link">Read more</NuxtLink>
+      <!-- Dynamic translation for the button label -->
+      <AppButton
+        :to="article.path"
+        :label="$t('button.read_more')"
+        variant="default"
+        class="card-link"
+      />
     </div>
   </article>
 </template>
@@ -30,24 +36,62 @@ defineProps({
 .card-large {
   display: flex;
   flex-direction: column;
-  .card-img {
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  .image-wrapper {
+    position: relative;
     width: 100%;
-    height: 100%;
-    object-fit: cover;
+    aspect-ratio: 16/9;
+    overflow: hidden;
     margin-bottom: 0.5rem;
+
+    .card-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+
+    .image-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0);
+      transition: background-color 0.3s ease;
+    }
   }
+
+  .card-content {
+    padding: 1rem;
+  }
+
   .card-title {
     font-size: 1.125rem;
     margin-bottom: 0.25rem;
   }
+
   .card-description {
     font-size: 0.95rem;
     color: $color-text-secondary;
   }
+
   .card-link {
     margin-top: 0.5rem;
     font-weight: bold;
-    &:hover {
+    transition: text-decoration 0.3s ease;
+  }
+
+  &:hover {
+    .card-img {
+      transform: scale(1.05);
+    }
+    .image-overlay {
+      background: rgba(0, 0, 0, 0.2);
+    }
+    .card-link {
       text-decoration: underline;
     }
   }

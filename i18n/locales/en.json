@@ -1,5 +1,14 @@
 {
-    "welcome": "Welcome",
-    "home": "Home",
-    "profile": "Profile"
+    "header": {
+        "home": "Home",
+        "blog": "Blog",
+        "about": "About"
+    },
+    "button": {
+        "read_more": "Read more"
+    },
+    "hero": {
+        "title": "Explore World Trends",
+        "description": "Stay updated with the latest breaking news and insights from around the globe."
+    }
 }

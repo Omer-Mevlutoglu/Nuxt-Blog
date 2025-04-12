@@ -1,0 +1,14 @@
+{
+    "button": {
+        "read_more": "Daha fazla oku"
+    },
+    "header": {
+        "home": "Ana Sayfa",
+        "blog": "Blog",
+        "about": "Hakkımızda"
+    },
+    "hero": {
+        "title": "Dünya Trendlerini Keşfedin",
+        "description": "En son haberler ve içgörülerle güncel kalın."
+    }
+}

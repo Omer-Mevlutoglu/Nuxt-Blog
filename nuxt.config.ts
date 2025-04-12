@@ -14,10 +14,10 @@ export default defineNuxtConfig({
     "@nuxtjs/i18n",
   ],
   i18n: {
-    strategy: "no_prefix",
+    strategy: "prefix",
     locales: [
       { code: "en", name: "English", file: "en.json" },
-      { code: "ar", name: "Arabic", file: "ar.json" },
+      { code: "tr", name: "Türkçe", file: "tr.json" },
     ],
     defaultLocale: "en",
     lazy: true,

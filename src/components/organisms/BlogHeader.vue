@@ -1,22 +1,26 @@
 <template>
   <header class="blog-header">
     <div class="container header-container">
-      <!-- Logo -->
+      <!-- Logo (using localized home text if desired) -->
       <div class="logo">
-        <NuxtLink to="/">NXT</NuxtLink>
+        <NuxtLink :to="$localePath({ name: 'index' })">NXT</NuxtLink>
       </div>
 
       <!-- Navigation Menu -->
       <nav class="nav-menu">
-        <NuxtLink to="/">Home</NuxtLink>
-        <NuxtLink to="/">Blog</NuxtLink>
-        <NuxtLink to="/">About</NuxtLink>
+        <NuxtLink :to="$localePath({ name: 'index' })">{{
+          $t("header.home")
+        }}</NuxtLink>
+        <NuxtLink :to="$localePath('/news')">{{ $t("header.blog") }}</NuxtLink>
+        <NuxtLink :to="$localePath({ name: 'about' })">{{
+          $t("header.about")
+        }}</NuxtLink>
       </nav>
 
       <!-- Language Switcher -->
-      <!-- <div class="language-switcher">
+      <div class="language-switcher">
         <LanguageSwitcher />
-      </div> -->
+      </div>
     </div>
   </header>
 </template>
@@ -40,7 +44,6 @@
   .logo {
     font-size: $font-size-logo;
     font-weight: $font-weight-logo;
-
     a {
       text-decoration: none;
       color: $color-text-primary;
@@ -51,15 +54,14 @@
     display: flex;
     gap: $nav-gap;
     flex-wrap: wrap;
-
     a {
       text-decoration: none;
       color: $color-text-secondary;
       transition: color 0.3s;
       white-space: nowrap;
-
       &:hover {
         color: $color-text-hover;
+        cursor: pointer;
       }
     }
   }

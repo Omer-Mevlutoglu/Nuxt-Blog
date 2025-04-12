@@ -2,9 +2,9 @@
 const { data: news } = await useAsyncData("news", () => {
   return queryCollection("news").all();
 });
-const leftArticles = computed(() => news.value?.slice(0, 3) ?? []);
-const mainArticle = computed(() => news.value?.[3] || null);
-const rightArticles = computed(() => news.value?.slice(4) ?? []);
+const leftArticles = computed(() => news.value?.slice(0, 2) ?? []);
+const mainArticle = computed(() => news.value?.[2] || null);
+const rightArticles = computed(() => news.value?.slice(3) ?? []);
 </script>
 
 <template>
@@ -49,7 +49,7 @@ const rightArticles = computed(() => news.value?.slice(4) ?? []);
     .right-column {
       display: flex;
       flex-direction: column;
-      gap: 1rem;
+      gap: 0.5rem;
     }
   }
 

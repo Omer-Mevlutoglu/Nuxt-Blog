@@ -12,7 +12,8 @@
     <div class="hero-content">
       <h2 class="hero-title">{{ article.title }}</h2>
       <p class="hero-description">{{ article.description }}</p>
-      <NuxtLink :to="article.path" class="hero-link">Read more</NuxtLink>
+      <!-- Dynamic translation for the button label -->
+      <AppButton :to="article.path" :label="$t('button.read_more')" variant="default" class="hero-link" />
     </div>
   </article>
 </template>
@@ -21,8 +22,8 @@
 defineProps({
   article: {
     type: Object,
-    required: true,
-  },
+    required: true
+  }
 });
 </script>
 
@@ -30,25 +31,63 @@ defineProps({
 .card-hero {
   display: flex;
   flex-direction: column;
-  .hero-img {
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  .hero-img-wrapper {
+    position: relative;
     width: 100%;
-    height: auto;
-    object-fit: cover;
+    aspect-ratio: 16/9;
+    overflow: hidden;
     margin-bottom: 1rem;
+
+    .hero-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+    
+    .image-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0);
+      transition: background-color 0.3s ease;
+    }
   }
+
+  .hero-content {
+    padding: 1rem;
+  }
+  
   .hero-title {
     font-size: 1.5rem;
     font-weight: bold;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.3rem;
   }
+
   .hero-description {
     font-size: 1rem;
     color: $color-text-secondary;
-    margin-bottom: 1rem;
+    margin-bottom: 0.8rem;
   }
+
   .hero-link {
     font-weight: bold;
-    &:hover {
+    transition: text-decoration 0.3s ease;
+  }
+
+  &:hover {
+    .hero-img {
+      transform: scale(1.05);
+    }
+    .image-overlay {
+      background: rgba(0, 0, 0, 0.2);
+    }
+    .hero-link {
       text-decoration: underline;
     }
   }
