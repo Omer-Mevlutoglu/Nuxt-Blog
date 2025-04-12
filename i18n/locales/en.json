@@ -1,11 +1,17 @@
 {
+    "featured": {
+        "title": "Featured News"
+    },
+    "sports": {
+        "title": "Latest Sports News"
+    },
+    "button": {
+        "read_more": "Read more"
+    },
     "header": {
         "home": "Home",
         "blog": "Blog",
         "about": "About"
-    },
-    "button": {
-        "read_more": "Read more"
     },
     "hero": {
         "title": "Explore World Trends",

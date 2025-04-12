@@ -9,7 +9,7 @@ articlesStore.fetchArticles();
 // Partition the articles for layout
 const leftArticles = computed(() => articlesStore.articles.slice(0, 2));
 const mainArticle = computed(() => articlesStore.articles[2] || null);
-const rightArticles = computed(() => articlesStore.articles.slice(3));
+const rightArticles = computed(() => articlesStore.articles.slice(3, 6));
 </script>
 
 <template>

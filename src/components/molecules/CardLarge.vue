@@ -50,6 +50,7 @@ defineProps({
       width: 100%;
       height: 100%;
       object-fit: cover;
+      border-radius: 0.5rem;
       transition: transform 0.3s ease;
     }
 
@@ -60,6 +61,7 @@ defineProps({
       width: 100%;
       height: 100%;
       background: rgba(0, 0, 0, 0);
+      border-radius: 0.5rem;
       transition: background-color 0.3s ease;
     }
   }
@@ -85,9 +87,7 @@ defineProps({
   }
 
   &:hover {
-    .card-img {
-      transform: scale(1.05);
-    }
+ 
     .image-overlay {
       background: rgba(0, 0, 0, 0.2);
     }

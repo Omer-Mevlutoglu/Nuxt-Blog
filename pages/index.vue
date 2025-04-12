@@ -1,6 +1,7 @@
 <template>
   <div class="home">
     <HeroSection />
+    <SportsSection />
   </div>
 </template>
 

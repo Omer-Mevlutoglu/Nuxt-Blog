@@ -13,7 +13,12 @@
       <h2 class="hero-title">{{ article.title }}</h2>
       <p class="hero-description">{{ article.description }}</p>
       <!-- Dynamic translation for the button label -->
-      <AppButton :to="article.path" :label="$t('button.read_more')" variant="default" class="hero-link" />
+      <AppButton
+        :to="article.path"
+        :label="$t('button.read_more')"
+        variant="default"
+        class="hero-link"
+      />
     </div>
   </article>
 </template>
@@ -22,8 +27,8 @@
 defineProps({
   article: {
     type: Object,
-    required: true
-  }
+    required: true,
+  },
 });
 </script>
 
@@ -45,9 +50,10 @@ defineProps({
       width: 100%;
       height: 100%;
       object-fit: cover;
+      border-radius: 0.5rem;
       transition: transform 0.3s ease;
     }
-    
+
     .image-overlay {
       position: absolute;
       top: 0;
@@ -62,7 +68,7 @@ defineProps({
   .hero-content {
     padding: 1rem;
   }
-  
+
   .hero-title {
     font-size: 1.5rem;
     font-weight: bold;
@@ -81,9 +87,6 @@ defineProps({
   }
 
   &:hover {
-    .hero-img {
-      transform: scale(1.05);
-    }
     .image-overlay {
       background: rgba(0, 0, 0, 0.2);
     }
