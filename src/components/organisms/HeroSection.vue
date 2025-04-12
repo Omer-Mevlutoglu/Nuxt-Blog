@@ -1,7 +1,16 @@
 <script setup lang="ts">
-const { data: news } = await useAsyncData("news", () => {
-  return queryCollection("news").all();
-});
+const { locale } = useI18n();
+const currentLocale = locale.value; // The current locale, e.g., 'en' or 'tr'
+
+// Fetch articles from the "news" collection with a filter on the 'locale' field.
+const { data: news } = await useAsyncData("newsArticles", () =>
+  queryCollection("news")
+    .where("locale", "=", currentLocale)
+    .order("date", "DESC")
+    .all()
+);
+
+// Partition articles for the hero section layout:
 const leftArticles = computed(() => news.value?.slice(0, 2) ?? []);
 const mainArticle = computed(() => news.value?.[2] || null);
 const rightArticles = computed(() => news.value?.slice(3) ?? []);
@@ -10,7 +19,7 @@ const rightArticles = computed(() => news.value?.slice(3) ?? []);
 <template>
   <section class="hero-section">
     <div class="hero-grid container">
-      <!-- Left Column: 3 Large Articles -->
+      <!-- Left Column: Large Article Cards -->
       <div class="left-column">
         <CardLarge
           v-for="(article, index) in leftArticles"
@@ -19,12 +28,12 @@ const rightArticles = computed(() => news.value?.slice(3) ?? []);
         />
       </div>
 
-      <!-- Middle Column: Hero Article -->
+      <!-- Middle Column: Main Hero Article -->
       <div class="middle-column">
         <CardHero v-if="mainArticle" :article="mainArticle" />
       </div>
 
-      <!-- Right Column: Smaller Articles -->
+      <!-- Right Column: Smaller Article Cards -->
       <div class="right-column">
         <CardSmall
           v-for="(article, index) in rightArticles"
@@ -57,7 +66,6 @@ const rightArticles = computed(() => news.value?.slice(3) ?? []);
     .hero-grid {
       grid-template-columns: 1fr;
     }
-
     .left-column,
     .right-column {
       flex-direction: row;

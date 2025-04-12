@@ -48,4 +48,16 @@ const currentLocale = locale;
     }
   }
 }
+
+/* For screens smaller than 576px */
+@media (max-width: 576px) {
+  .language-switcher {
+    gap: 5px;
+
+    a {
+      padding: 3px 7px; // Reduced padding for mobile screens
+      font-size: 0.875rem; // Smaller font size for better fit
+    }
+  }
+}
 </style>
