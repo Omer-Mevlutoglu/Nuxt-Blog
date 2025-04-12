@@ -1,19 +1,15 @@
 <script setup lang="ts">
-const { locale } = useI18n();
-const currentLocale = locale.value; // The current locale, e.g., 'en' or 'tr'
+import { useArticlesStore } from "~/src/store/articles.store";
+// Get the articles store instance
+const articlesStore = useArticlesStore();
 
-// Fetch articles from the "news" collection with a filter on the 'locale' field.
-const { data: news } = await useAsyncData("newsArticles", () =>
-  queryCollection("news")
-    .where("locale", "=", currentLocale)
-    .order("date", "DESC")
-    .all()
-);
+// Fetch articles when the component mounts
+articlesStore.fetchArticles();
 
-// Partition articles for the hero section layout:
-const leftArticles = computed(() => news.value?.slice(0, 2) ?? []);
-const mainArticle = computed(() => news.value?.[2] || null);
-const rightArticles = computed(() => news.value?.slice(3) ?? []);
+// Partition the articles for layout
+const leftArticles = computed(() => articlesStore.articles.slice(0, 2));
+const mainArticle = computed(() => articlesStore.articles[2] || null);
+const rightArticles = computed(() => articlesStore.articles.slice(3));
 </script>
 
 <template>
@@ -28,12 +24,12 @@ const rightArticles = computed(() => news.value?.slice(3) ?? []);
         />
       </div>
 
-      <!-- Middle Column: Main Hero Article -->
+      <!-- Middle Column: Hero Article -->
       <div class="middle-column">
         <CardHero v-if="mainArticle" :article="mainArticle" />
       </div>
 
-      <!-- Right Column: Smaller Article Cards -->
+      <!-- Right Column: Small Article Cards -->
       <div class="right-column">
         <CardSmall
           v-for="(article, index) in rightArticles"

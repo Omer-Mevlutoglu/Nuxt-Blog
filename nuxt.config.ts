@@ -12,6 +12,7 @@ export default defineNuxtConfig({
     "@nuxt/test-utils",
     "@nuxt/icon",
     "@nuxtjs/i18n",
+    "@pinia/nuxt",
   ],
   i18n: {
     strategy: "prefix",
