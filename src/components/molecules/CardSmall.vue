@@ -1,14 +1,20 @@
 <template>
   <article class="card card-small">
+    <!-- Tag list above the title -->
+
     <h4 class="small-title">{{ article.title }}</h4>
     <p class="small-summary">{{ article.description }}</p>
-    <!-- Dynamic translation for the button label -->
     <AppButton
       :to="article.path"
       :label="$t('button.read_more')"
       variant="default"
       class="small-link"
     />
+    <div class="tag-list">
+      <span v-for="(tag, index) in article.tags" :key="index" class="tag">
+        {{ tag }}
+      </span>
+    </div>
   </article>
 </template>
 
@@ -26,6 +32,23 @@ defineProps({
   margin-bottom: 0.5rem;
   cursor: pointer;
   transition: all 0.3s ease;
+
+  .tag-list {
+    margin-top: 0.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.3rem;
+
+    .tag {
+      font-size: 0.65rem;
+      background-color: rgba($color-primary, 0.08);
+      color: $color-primary;
+      padding: 0.15rem 0.4rem;
+      border-radius: 9999px;
+      text-transform: uppercase;
+      font-weight: 500;
+    }
+  }
 
   .small-title {
     font-weight: 700;

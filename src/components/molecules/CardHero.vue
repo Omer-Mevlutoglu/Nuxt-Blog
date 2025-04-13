@@ -10,9 +10,14 @@
       <div class="image-overlay" />
     </div>
     <div class="hero-content">
+      <!-- Tag list for the hero card -->
+      <div class="tag-list">
+        <span v-for="(tag, index) in article.tags" :key="index" class="tag">
+          {{ tag }}
+        </span>
+      </div>
       <h2 class="hero-title">{{ article.title }}</h2>
       <p class="hero-description">{{ article.description }}</p>
-      <!-- Dynamic translation for the button label -->
       <AppButton
         :to="article.path"
         :label="$t('button.read_more')"
@@ -67,6 +72,23 @@ defineProps({
 
   .hero-content {
     padding: 1rem;
+
+    .tag-list {
+      margin-bottom: 0.5rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+
+      .tag {
+        font-size: 0.7rem;
+        background-color: rgba($color-primary, 0.1);  // use your primary color variable with transparency
+        color: $color-primary;
+        padding: 0.2rem 0.5rem;
+        border-radius: 9999px;
+        text-transform: uppercase;
+        font-weight: 500;
+      }
+    }
   }
 
   .hero-title {

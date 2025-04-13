@@ -21,7 +21,7 @@ const articlesStore = useArticlesStore();
 const sportsArticles = computed(() =>
   articlesStore.articles.filter(
     (article) =>
-      article.tags.includes("sport") || article.tags.includes("sports")
+      article.tags.includes("sport") || article.tags.includes("spor")
   )
 );
 </script>

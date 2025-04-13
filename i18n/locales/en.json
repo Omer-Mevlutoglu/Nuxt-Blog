@@ -16,5 +16,11 @@
     "hero": {
         "title": "Explore World Trends",
         "description": "Stay updated with the latest breaking news and insights from around the globe."
+    },
+    "footer": {
+        "aboutTitle": "About Us",
+        "aboutDescription": "NXT Blog is committed to providing up-to-date news and insights.",
+        "navigation": "Navigation",
+        "followUs": "Follow Us"
     }
 }

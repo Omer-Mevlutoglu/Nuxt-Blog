@@ -2,6 +2,7 @@
   <div class="home">
     <HeroSection />
     <SportsSection />
+    <FeaturedSlider />
   </div>
 </template>
 

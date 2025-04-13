@@ -1,20 +1,38 @@
 <script setup lang="ts">
 import { useArticlesStore } from "~/src/store/articles.store";
-// Get the articles store instance
+
 const articlesStore = useArticlesStore();
+const { locale } = useI18n();
 
-// Fetch articles when the component mounts
-articlesStore.fetchArticles();
+onMounted(() => {
+  articlesStore.fetchArticles();
+});
 
-// Partition the articles for layout
-const leftArticles = computed(() => articlesStore.articles.slice(0, 2));
-const mainArticle = computed(() => articlesStore.articles[2] || null);
-const rightArticles = computed(() => articlesStore.articles.slice(3, 6));
+watch(
+  () => locale.value,
+  () => {
+    articlesStore.fetchArticles();
+  }
+);
+
+const newsArticles = computed(() =>
+  articlesStore.articles.filter(
+    (article) => article.tags && (article.tags.includes("news") || article.tags.includes("haber"))
+  )
+);
+
+// Partition articles for layout
+const leftArticles = computed(() => newsArticles.value.slice(0, 2));
+const mainArticle = computed(() => newsArticles.value[2] || null);
+const rightArticles = computed(() => newsArticles.value.slice(2, 6));
 </script>
 
 <template>
   <section class="hero-section">
     <div class="hero-grid container">
+      <!-- Loader overlay; always rendered but visible only when loading -->
+      <div v-if="articlesStore.loading" class="loader">Loading articles...</div>
+
       <!-- Left Column: Large Article Cards -->
       <div class="left-column">
         <CardLarge
@@ -24,7 +42,7 @@ const rightArticles = computed(() => articlesStore.articles.slice(3, 6));
         />
       </div>
 
-      <!-- Middle Column: Hero Article -->
+      <!-- Middle Column: Featured Hero Article -->
       <div class="middle-column">
         <CardHero v-if="mainArticle" :article="mainArticle" />
       </div>
@@ -44,6 +62,7 @@ const rightArticles = computed(() => articlesStore.articles.slice(3, 6));
 <style scoped lang="scss">
 .hero-section {
   padding: 2rem 0;
+  position: relative; // Needed for the loader overlay positioning
 
   .hero-grid {
     display: grid;
@@ -56,6 +75,20 @@ const rightArticles = computed(() => articlesStore.articles.slice(3, 6));
       flex-direction: column;
       gap: 0.5rem;
     }
+  }
+
+  /* Loader styles: absolute overlay that doesn't unmount the component */
+  .loader {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(255, 255, 255, 0.8);
+    padding: 1rem 2rem;
+    border-radius: 0.5rem;
+    font-size: 1.25rem;
+    color: $color-text-secondary;
+    z-index: 10;
   }
 
   @media screen and (max-width: 768px) {
