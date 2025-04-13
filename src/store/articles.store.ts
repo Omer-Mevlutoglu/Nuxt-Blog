@@ -2,7 +2,7 @@ import { defineStore } from "pinia";
 import type { Article } from "../types/article";
 
 export const useArticlesStore = defineStore("articles", {
-    // initial state
+  // initial state
   state: () => ({
     articles: [] as Article[],
     loading: false,
@@ -23,6 +23,7 @@ export const useArticlesStore = defineStore("articles", {
       try {
         const { locale } = useI18n();
         const currentLocale = locale.value;
+
         const result = await queryCollection("news")
           .where("locale", "=", currentLocale)
           .order("date", "DESC")
@@ -31,6 +32,7 @@ export const useArticlesStore = defineStore("articles", {
         this.articles = result.map((item) => ({
           ...item,
           date: new Date(item.date).toISOString(),
+          path: item.slug ? `/news/${item.slug}` : `/news/unknown`,
         }));
       } catch (error: unknown) {
         this.error =

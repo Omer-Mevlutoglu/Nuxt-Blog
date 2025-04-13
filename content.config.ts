@@ -47,6 +47,7 @@ export default defineContentConfig({
         image: z.string(),
         date: z.date(),
         locale: z.string(),
+        slug: z.string(),
       }),
     }),
   },

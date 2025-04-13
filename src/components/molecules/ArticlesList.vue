@@ -5,6 +5,7 @@
       v-for="(article, index) in articles"
       :key="index"
       :article="article"
+      :to="article.path"
     />
   </div>
 </template>
