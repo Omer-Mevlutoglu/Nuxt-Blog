@@ -6,12 +6,15 @@
         "title": "En Son Spor Haberleri"
     },
     "button": {
-        "read_more": "Daha fazla oku"
+        "read_more": "Daha fazla oku",
+        "prev": "Önceki",
+        "next": "Sonraki"
     },
     "header": {
         "home": "Ana Sayfa",
         "blog": "Blog",
-        "about": "Hakkımızda"
+        "about": "Hakkımızda",
+        "title": "Dünya Trendlerini Keşfedin"
     },
     "hero": {
         "title": "Dünya Trendlerini Keşfedin",

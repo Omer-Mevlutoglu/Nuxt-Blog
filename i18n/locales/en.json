@@ -6,12 +6,15 @@
         "title": "Latest Sports News"
     },
     "button": {
-        "read_more": "Read more"
+        "read_more": "Read more",
+        "prev": "Previous",
+        "next": "Next"
     },
     "header": {
         "home": "Home",
         "blog": "Blog",
-        "about": "About"
+        "about": "About",
+        "title":"Explore World Trends"
     },
     "hero": {
         "title": "Explore World Trends",

@@ -10,8 +10,12 @@
       <div class="footer-nav">
         <h4 class="footer-title">{{ $t("footer.navigation") }}</h4>
         <nav>
-          <NuxtLink to="/">{{ $t("header.home") }}</NuxtLink>
-          <NuxtLink to="/blog">{{ $t("header.blog") }}</NuxtLink>
+          <NuxtLink :to="$localePath({ name: 'index' })">{{
+            $t("header.home")
+          }}</NuxtLink>
+          <NuxtLink :to="$localePath('/news')">{{
+            $t("header.blog")
+          }}</NuxtLink>
           <NuxtLink to="/about">{{ $t("header.about") }}</NuxtLink>
         </nav>
       </div>
