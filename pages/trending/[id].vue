@@ -51,7 +51,7 @@ if (post.value) {
 
 .trending-detail {
   padding: 3rem 0;
-  animation: fadeIn 0.6s ease-out;
+  animation: fadeIn 1s ease-in-out;
 
   .post-header {
     text-align: left;
@@ -105,7 +105,7 @@ if (post.value) {
       font-size: 1rem;
       line-height: 1.8;
       color: $color-text-primary;
-      animation: slideInRight 0.6s ease-out;
+      animation: slideInRight 1s ease-in-out;
     }
   }
 }

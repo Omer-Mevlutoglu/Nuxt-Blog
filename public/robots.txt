@@ -1,1 +1,12 @@
+User-agent: *
+
+Disallow: /server/
+Disallow: /src/
+Disallow: /assets/
+Disallow: /store/
+Disallow: /types/
+
+Allow: /public/
+
+Sitemap: /sitemap.xml
 

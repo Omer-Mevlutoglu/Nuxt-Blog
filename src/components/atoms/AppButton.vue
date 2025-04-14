@@ -34,8 +34,13 @@ const variantClass = computed(() => {
     background-color: $color-primary;
     padding: 5px 5px;
     color: $color-white;
+    width: 50%;
+    padding: 0.5rem 1rem;
+    text-align: center;
+    border-radius: 15px;
     &:hover {
       background-color: color.scale($color-primary, $lightness: 10%);
+      text-decoration: none;
     }
   }
 

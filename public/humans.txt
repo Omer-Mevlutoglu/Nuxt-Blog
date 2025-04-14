@@ -1,0 +1,17 @@
+Site Name: NXT Blog
+Developed By: Ömer Mevlutoglu
+Contact: omermevlutoglu33@gmail.com
+
+Thanks to:
+- Nuxt 3 Framework
+- Nuxt Content Module
+- Pinia for state management
+- Vue I18n for localization
+- VueUse and Composition API
+- SCSS for styling
+
+Built with:
+- Nuxt 3, Vite & Vue 3
+- ESLint & Prettier
+
+© 2025 NXT Blog. All Rights Reserved.

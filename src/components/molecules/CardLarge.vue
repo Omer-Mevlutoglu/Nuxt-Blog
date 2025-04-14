@@ -47,7 +47,7 @@ defineProps({
   flex-direction: column;
   cursor: pointer;
   transition: all 0.3s ease;
-  height: 480px; // Fixed height
+  height: 480px;
   width: 100%;
   background: #fff;
   border-radius: 0.5rem;
@@ -56,7 +56,7 @@ defineProps({
   .image-wrapper {
     position: relative;
     width: 100%;
-    height: 220px; // Fixed height for image
+    height: 220px;
     overflow: hidden;
     margin-bottom: 0.5rem;
 
@@ -85,7 +85,7 @@ defineProps({
     display: flex;
     flex-direction: column;
     flex: 1;
-    overflow: hidden; // Prevent content overflow
+    overflow: hidden;
 
     .tag-list {
       margin-bottom: 0.5rem;
@@ -128,7 +128,7 @@ defineProps({
     }
 
     .card-link {
-      margin-top: auto; // Push button to bottom
+      margin-top: auto;
       font-weight: bold;
       transition: text-decoration 0.3s ease;
     }
