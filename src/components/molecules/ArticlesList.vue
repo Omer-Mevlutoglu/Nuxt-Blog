@@ -1,4 +1,3 @@
-<!-- src/components/organisms/ArticlesList.vue -->
 <template>
   <div class="articles-list">
     <CardLarge

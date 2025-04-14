@@ -1,4 +1,3 @@
-<!-- src/components/molecules/SearchFilter.vue -->
 <template>
     <div class="search-filter">
       <input v-model="localSearch" type="text" placeholder="Search articles..." @input="updateSearch" >

@@ -13,8 +13,8 @@
     "header": {
         "home": "Home",
         "blog": "Blog",
-        "about": "About",
-        "title":"Explore World Trends"
+        "trending": "Trending",
+        "title": "Explore World Trends"
     },
     "hero": {
         "title": "Explore World Trends",
@@ -25,5 +25,8 @@
         "aboutDescription": "NXT Blog is committed to providing up-to-date news and insights.",
         "navigation": "Navigation",
         "followUs": "Follow Us"
+    },
+    "trending": {
+        "title": "Trending Posts"
     }
 }

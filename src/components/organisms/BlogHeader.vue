@@ -12,9 +12,7 @@
           $t("header.home")
         }}</NuxtLink>
         <NuxtLink :to="$localePath('/news')">{{ $t("header.blog") }}</NuxtLink>
-        <NuxtLink :to="$localePath({ name: 'about' })">{{
-          $t("header.about")
-        }}</NuxtLink>
+        <NuxtLink :to="$localePath('/trending')">{{ $t("header.trending") }}</NuxtLink>
       </nav>
 
       <!-- Language Switcher -->

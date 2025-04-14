@@ -13,7 +13,7 @@
     "header": {
         "home": "Ana Sayfa",
         "blog": "Blog",
-        "about": "Hakkımızda",
+        "trending": "Trendler",
         "title": "Dünya Trendlerini Keşfedin"
     },
     "hero": {
@@ -25,5 +25,8 @@
         "aboutDescription": "NXT Blog, en güncel haber ve içgörüleri sağlamaya kendini adamıştır.",
         "navigation": "Navigasyon",
         "followUs": "Bizi Takip Edin"
+    },
+    "trending": {
+        "title": "Trend Olan Gönderiler"
     }
 }

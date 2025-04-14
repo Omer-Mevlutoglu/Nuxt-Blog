@@ -6,7 +6,6 @@
         <h4 class="footer-title">{{ $t("footer.aboutTitle") }}</h4>
         <p class="footer-description">{{ $t("footer.aboutDescription") }}</p>
       </div>
-      <!-- Navigation Section -->
       <div class="footer-nav">
         <h4 class="footer-title">{{ $t("footer.navigation") }}</h4>
         <nav>
@@ -16,10 +15,11 @@
           <NuxtLink :to="$localePath('/news')">{{
             $t("header.blog")
           }}</NuxtLink>
-          <NuxtLink to="/about">{{ $t("header.about") }}</NuxtLink>
+          <NuxtLink :to="$localePath('/trending')">{{
+            $t("header.trending")
+          }}</NuxtLink>
         </nav>
       </div>
-      <!-- Social Section -->
       <div class="footer-social">
         <h4 class="footer-title">{{ $t("footer.followUs") }}</h4>
         <div class="social-links">
@@ -43,9 +43,7 @@
   </footer>
 </template>
 
-<script setup lang="ts">
-// No additional reactive data is needed here
-</script>
+<script setup lang="ts"></script>
 
 <style scoped lang="scss">
 @use "sass:color";

@@ -23,22 +23,16 @@ const sliderArticles = computed(() =>
   articlesStore.articles.filter((article) => !!article.image)
 );
 
-// Define responsive options for the slider.
-// At viewport widths less than 600px, show 1 slide,
-// from 600px to 991px, show 2 slides,
-// and for 992px and above, show 3 slides.
+
 const breakpoints = {
-  // ViewPort >= 0px
   0: {
     itemsToShow: 1,
     snapAlign: "center",
   },
-  // ViewPort >= 600px
   600: {
     itemsToShow: 2,
     snapAlign: "center",
   },
-  // ViewPort >= 991px
   991: {
     itemsToShow: 3,
     snapAlign: "start",
@@ -57,7 +51,7 @@ const breakpoints = {
           snapAlign: 'center',
         }"
         :breakpoints="breakpoints"
-        :autoplay="3000"
+        :autoplay="1000"
         :pause-autoplay-on-hover="true"
         :wrap-around="true"
         navigation

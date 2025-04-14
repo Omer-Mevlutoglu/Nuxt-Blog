@@ -1,6 +1,5 @@
 <template>
   <div class="language-switcher">
-    <!-- Generate localized links for each available language -->
     <NuxtLink
       v-for="loc in locales"
       :key="loc.code"
@@ -13,10 +12,8 @@
 </template>
 
 <script setup lang="ts">
-// Auto-imported if enabled; otherwise import from '#imports'
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const { locales, locale, setLocale } = useI18n();
-// Reactive current locale value
 const currentLocale = locale;
 </script>
 
@@ -49,14 +46,13 @@ const currentLocale = locale;
   }
 }
 
-/* For screens smaller than 576px */
 @media (max-width: 576px) {
   .language-switcher {
     gap: 5px;
 
     a {
-      padding: 3px 7px; // Reduced padding for mobile screens
-      font-size: 0.875rem; // Smaller font size for better fit
+      padding: 3px 7px;
+      font-size: 0.875rem; 
     }
   }
 }

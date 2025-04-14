@@ -21,7 +21,7 @@
       <AppButton
         :to="article.path"
         :label="$t('button.read_more')"
-        variant="default"
+        :variant="variant"
         class="card-link"
       />
     </div>
@@ -33,6 +33,10 @@ defineProps({
   article: {
     type: Object,
     required: true,
+  },
+  variant: {
+    type: String,
+    default: "default",
   },
 });
 </script>

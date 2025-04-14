@@ -1,4 +1,3 @@
-<!-- src/components/molecules/SliderCard.vue -->
 <template>
   <article class="slider-card">
     <div class="post-img">
