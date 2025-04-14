@@ -6,7 +6,7 @@
         :src="article.image"
         :alt="article.title"
         class="card-img"
-      >
+      />
       <div class="image-overlay" />
     </div>
     <div class="card-content">
@@ -47,11 +47,16 @@ defineProps({
   flex-direction: column;
   cursor: pointer;
   transition: all 0.3s ease;
+  height: 480px; // Fixed height
+  width: 100%;
+  background: #fff;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 
   .image-wrapper {
     position: relative;
     width: 100%;
-    aspect-ratio: 16/9;
+    height: 220px; // Fixed height for image
     overflow: hidden;
     margin-bottom: 0.5rem;
 
@@ -59,7 +64,7 @@ defineProps({
       width: 100%;
       height: 100%;
       object-fit: cover;
-      border-radius: 0.5rem;
+      border-radius: 0.5rem 0.5rem 0 0;
       transition: transform 0.3s ease;
     }
 
@@ -70,13 +75,17 @@ defineProps({
       width: 100%;
       height: 100%;
       background: rgba(0, 0, 0, 0);
-      border-radius: 0.5rem;
+      border-radius: 0.5rem 0.5rem 0 0;
       transition: background-color 0.3s ease;
     }
   }
 
   .card-content {
     padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    overflow: hidden; // Prevent content overflow
 
     .tag-list {
       margin-bottom: 0.5rem;
@@ -94,30 +103,82 @@ defineProps({
         font-weight: 500;
       }
     }
-  }
 
-  .card-title {
-    font-size: 1.125rem;
-    margin-bottom: 0.25rem;
-  }
+    .card-title {
+      font-size: 1.125rem;
+      margin-bottom: 0.25rem;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      line-height: 1.4;
+    }
 
-  .card-description {
-    font-size: 0.95rem;
-    color: $color-text-secondary;
-  }
+    .card-description {
+      font-size: 0.88rem;
+      color: $color-text-secondary;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      flex: 1;
+      line-height: 1.5;
+    }
 
-  .card-link {
-    margin-top: 0.5rem;
-    font-weight: bold;
-    transition: text-decoration 0.3s ease;
+    .card-link {
+      margin-top: auto; // Push button to bottom
+      font-weight: bold;
+      transition: text-decoration 0.3s ease;
+    }
   }
 
   &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+
+    .card-img {
+      transform: scale(1.05);
+    }
+
     .image-overlay {
       background: rgba(0, 0, 0, 0.2);
     }
+
     .card-link {
       text-decoration: underline;
+    }
+  }
+}
+
+// Responsive breakpoints
+@media (max-width: 1200px) {
+  .card-large {
+    height: 460px;
+
+    .image-wrapper {
+      height: 200px;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .card-large {
+    height: 440px;
+
+    .image-wrapper {
+      height: 180px;
+    }
+
+    .card-content {
+      .card-title {
+        font-size: 1rem;
+      }
+
+      .card-description {
+        font-size: 0.9rem;
+      }
     }
   }
 }

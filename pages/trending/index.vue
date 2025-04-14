@@ -1,18 +1,18 @@
 <script setup lang="ts">
-const trendingEndpoint = "https://dummyjson.com/posts";
+import { useTrendingStore } from "~/src/store/trending.store";
 
-const { data, status, error, refresh } = await useFetch(trendingEndpoint, {
-  default: () => ({ posts: [] }),
-});
+const trendingStore = useTrendingStore();
 
-const trendingArticles = computed(() => data.value?.posts || []);
+if (!trendingStore.trendingArticles.length && !trendingStore.loading) {
+  trendingStore.fetchTrendingArticles();
+}
 
 const selectedTag = ref("All");
 const searchTerm = ref("");
 
 const availableTags = computed(() => {
   const tagsSet = new Set<string>();
-  trendingArticles.value.forEach((article) => {
+  trendingStore.trendingArticles.forEach((article) => {
     if (article.tags && Array.isArray(article.tags)) {
       article.tags.forEach((tag: string) => tagsSet.add(tag));
     }
@@ -21,7 +21,7 @@ const availableTags = computed(() => {
 });
 
 const filteredArticles = computed(() => {
-  let articles = trendingArticles.value;
+  let articles = trendingStore.trendingArticles;
 
   if (selectedTag.value && selectedTag.value !== "All") {
     articles = articles.filter((article) =>
@@ -41,14 +41,14 @@ const filteredArticles = computed(() => {
   return articles;
 });
 
-const getRandomImage = () => {
+const getSequentialImage = (index: number) => {
   const imageCount = 9;
-  const randomIndex = Math.floor(Math.random() * imageCount) + 1;
-  return `/images/trending/${randomIndex}.webp`;
+  const imageIndex = (index % imageCount) + 1;
+  return `/images/trending/${imageIndex}.webp`;
 };
-// Pagination settings.
+
 const currentPage = ref(1);
-const pageSize = ref(8);
+const pageSize = ref(4);
 const totalPages = computed(() =>
   Math.ceil(filteredArticles.value.length / pageSize.value)
 );
@@ -56,22 +56,34 @@ const paginatedArticles = computed(() => {
   const start = (currentPage.value - 1) * pageSize.value;
   return filteredArticles.value
     .slice(start, start + pageSize.value)
-    .map((article) => ({
+    .map((article, index) => ({
       ...article,
-      image: getRandomImage(),
+      image: getSequentialImage(start + index),
     }));
 });
 
 watch([selectedTag, searchTerm], () => {
   currentPage.value = 1;
 });
-
+const slideDirection = ref("");
 const nextPage = () => {
-  if (currentPage.value < totalPages.value) currentPage.value++;
+  if (currentPage.value < totalPages.value) {
+    slideDirection.value = "slide-left";
+    currentPage.value++;
+  }
 };
+
 const prevPage = () => {
-  if (currentPage.value > 1) currentPage.value--;
+  if (currentPage.value > 1) {
+    slideDirection.value = "slide-right";
+    currentPage.value--;
+  }
 };
+watch(currentPage, () => {
+  setTimeout(() => {
+    slideDirection.value = "";
+  }, 500); // Match this with CSS transition duration
+});
 </script>
 
 <template>
@@ -102,14 +114,13 @@ const prevPage = () => {
       <div v-if="filteredArticles.length === 0" class="no-results">
         {{ $t("trending.no_results") }}
       </div>
-
-      <div v-else class="articles-grid">
+      <div v-else class="articles-grid" :class="slideDirection">
         <CardLarge
           v-for="article in paginatedArticles"
           :key="article.id"
           :article="{
             ...article,
-            description: article.body.substring(0, 150) + '...',
+            description: article.body.substring(0, 60) + '.....',
             path: `/trending/${article.id}`,
             image: article.image,
           }"
@@ -132,7 +143,7 @@ const prevPage = () => {
 @use "sass:color";
 
 .trending-page {
-  padding: 4rem 0;
+  padding: 2rem 0;
   min-height: 80vh;
   animation: fadeIn 0.6s ease-out;
 
@@ -141,9 +152,9 @@ const prevPage = () => {
     margin-bottom: 2rem;
     text-align: center;
     color: $color-text-primary;
-    transform: translateY(20px);
-    opacity: 0;
-    animation: slideDown 0.6s ease-out forwards;
+    // transform: translateY(20px);
+    opacity: 1;
+    // animation: slideDown 0.6s ease-out forwards;
   }
 
   .filter-section {
@@ -151,10 +162,10 @@ const prevPage = () => {
     flex-wrap: wrap;
     justify-content: center;
     gap: 1rem;
-    margin-bottom: 2rem;
-    transform: translateY(20px);
-    opacity: 0;
-    animation: slideDown 0.6s ease-out forwards 0.2s;
+    margin-bottom: 3rem;
+    // transform: translateY(20px);
+    opacity: 1;
+    // animation: slideDown 0.6s ease-out forwards 0.2s;
   }
 
   .loading-indicator {
@@ -205,9 +216,18 @@ const prevPage = () => {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 2rem;
-    opacity: 0;
-    transform: translateY(20px);
-    animation: slideUp 0.6s ease-out forwards 0.4s;
+    opacity: 1;
+    // transform: translateY(20px);
+    // animation: slideUp 0.6s ease-out forwards 0.4s;
+    transition: all 0.5s ease-out;
+
+    &.slide-left {
+      animation: slideLeft 0.5s ease-out;
+    }
+
+    &.slide-right {
+      animation: slideRight 0.5s ease-out;
+    }
   }
 }
 
@@ -252,6 +272,43 @@ const prevPage = () => {
   }
 }
 
+@keyframes slideLeft {
+  0% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  50% {
+    transform: translateX(-10%);
+    opacity: 0;
+  }
+  51% {
+    transform: translateX(10%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideRight {
+  0% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  50% {
+    transform: translateX(10%);
+    opacity: 0;
+  }
+  51% {
+    transform: translateX(-10%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
 /* Responsive adjustments */
 @media (max-width: $breakpoint-md) {
   .trending-page {

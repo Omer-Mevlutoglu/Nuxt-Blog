@@ -3,7 +3,10 @@
     <CardLarge
       v-for="(article, index) in articles"
       :key="index"
-      :article="article"
+      :article="{
+        ...article,
+        description: article.description.substring(0, 60) + '.....',
+      }"
       :to="article.path"
     />
   </div>
