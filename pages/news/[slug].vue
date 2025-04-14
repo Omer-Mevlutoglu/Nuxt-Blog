@@ -40,12 +40,12 @@ if (article.value) {
         :src="article.image"
         :alt="article.title"
         class="article-image"
-      />
+      >
     </div>
 
     <section class="article-content">
       <!-- Render the article's full content -->
-      <ContentRenderer :value="article.meta.body" />
+      <ContentRenderer :value="article.meta.body as Record<string, any>" />
     </section>
   </div>
   <div v-else class="not-found container">
@@ -57,7 +57,7 @@ if (article.value) {
 <style scoped lang="scss">
 @use "sass:color";
 .article-page {
-  padding: 2rem 0;
+  padding: 2rem;
   max-width: 800px;
   margin: 0 auto;
   animation: fadeIn 0.6s ease-out;
