@@ -2,7 +2,6 @@
 const route = useRoute();
 const { locale } = useI18n();
 const slug = route.params.slug as string;
-// Use a reactive key for useAsyncData so that it re-fetches when locale changes
 const { data: article } = await useAsyncData("article", () =>
   queryCollection("news")
     .where("slug", "=", slug)
@@ -10,7 +9,6 @@ const { data: article } = await useAsyncData("article", () =>
     .first()
 );
 
-// Once the article is available, update the page metadata for SEO
 if (article.value) {
   useHead({
     title: article.value.title,

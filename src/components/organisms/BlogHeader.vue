@@ -1,7 +1,15 @@
+<script setup lang="ts">
+import { defineAsyncComponent } from "vue";
+// Load LanguageSwitcher asynchronously if it's heavy or rarely used on first paint.
+const LanguageSwitcher = defineAsyncComponent(
+  () => import("~/src/components/molecules/LanguageSwitcher.vue")
+);
+</script>
+
 <template>
   <header class="blog-header">
     <div class="container header-container">
-      <!-- Logo (using localized home text if desired) -->
+      <!-- Logo -->
       <div class="logo">
         <NuxtLink :to="$localePath({ name: 'index' })">NXT</NuxtLink>
       </div>
@@ -12,10 +20,12 @@
           $t("header.home")
         }}</NuxtLink>
         <NuxtLink :to="$localePath('/news')">{{ $t("header.blog") }}</NuxtLink>
-        <NuxtLink :to="$localePath('/trending')">{{ $t("header.trending") }}</NuxtLink>
+        <NuxtLink :to="$localePath('/trending')">{{
+          $t("header.trending")
+        }}</NuxtLink>
       </nav>
 
-      <!-- Language Switcher -->
+      <!-- Language Switcher loaded asynchronously -->
       <div class="language-switcher">
         <LanguageSwitcher />
       </div>
@@ -42,6 +52,7 @@
   .logo {
     font-size: $font-size-logo;
     font-weight: $font-weight-logo;
+
     a {
       text-decoration: none;
       color: $color-text-primary;
@@ -52,14 +63,17 @@
     display: flex;
     gap: $nav-gap;
     flex-wrap: wrap;
+
     a {
       text-decoration: none;
       color: $color-text-secondary;
       transition: color 0.3s;
       white-space: nowrap;
+
       &:hover {
         color: $color-text-hover;
-        cursor: pointer;
+        /* Hint the browser to optimize hover animations */
+        will-change: color;
       }
     }
   }

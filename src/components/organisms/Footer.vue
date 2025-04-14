@@ -35,15 +35,17 @@
     </div>
     <div class="footer-bottom">
       <div class="container">
-        <p>
-          &copy; {{ new Date().getFullYear() }} NXT Blog. All Rights Reserved.
-        </p>
+        <p>&copy; {{ currentYear }} NXT Blog. All Rights Reserved.</p>
       </div>
     </div>
   </footer>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { computed } from "vue";
+
+const currentYear = computed(() => new Date().getFullYear());
+</script>
 
 <style scoped lang="scss">
 @use "sass:color";
@@ -96,9 +98,12 @@
   .footer-social a {
     color: #636e72;
     text-decoration: none;
-    transition: all 0.3s ease;
+    transition:
+      transform 0.3s ease,
+      color 0.3s ease;
     font-size: 0.95rem;
     padding: 0.25rem 0;
+    will-change: transform, color;
 
     &:hover {
       color: #2d3436;

@@ -1,4 +1,3 @@
-<!-- src/components/organisms/NewsSlider.vue -->
 <script setup lang="ts">
 import { Carousel, Slide } from "vue3-carousel";
 import "vue3-carousel/dist/carousel.css";
@@ -23,7 +22,6 @@ const sliderArticles = computed(() =>
   articlesStore.articles.filter((article) => !!article.image)
 );
 
-
 const breakpoints = {
   0: {
     itemsToShow: 1,
@@ -44,23 +42,26 @@ const breakpoints = {
   <section class="news-slider-section">
     <div class="container">
       <h2 class="section-title">{{ $t("featured.title") }}</h2>
-      <Carousel
-        id="news-slider"
-        :settings="{
-          itemsToShow: 1,
-          snapAlign: 'center',
-        }"
-        :breakpoints="breakpoints"
-        :autoplay="1000"
-        :pause-autoplay-on-hover="true"
-        :wrap-around="true"
-        navigation
-        pagination
-      >
-        <Slide v-for="(article, index) in sliderArticles" :key="index">
-          <SliderCard :article="article" />
-        </Slide>
-      </Carousel>
+      <!-- Render Carousel only if there are articles -->
+      <div v-if="sliderArticles.length">
+        <Carousel
+          id="news-slider"
+          :settings="{
+            itemsToShow: 1,
+            snapAlign: 'center',
+          }"
+          :breakpoints="breakpoints"
+          :autoplay="1000"
+          :pause-autoplay-on-hover="true"
+          :wrap-around="true"
+          navigation
+          pagination
+        >
+          <Slide v-for="(article, index) in sliderArticles" :key="index">
+            <SliderCard :article="article" />
+          </Slide>
+        </Carousel>
+      </div>
     </div>
   </section>
 </template>

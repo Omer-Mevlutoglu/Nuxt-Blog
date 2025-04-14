@@ -23,6 +23,9 @@ export default defineNuxtConfig({
     defaultLocale: "en",
     lazy: true,
     langDir: "locales/",
+    bundle: {
+      optimizeTranslationDirective: false,
+    },
   },
 
   css: ["~/assets/scss/global.scss"],

@@ -1,7 +1,5 @@
 <template>
   <article class="card card-small">
-    <!-- Tag list above the title -->
-
     <h4 class="small-title">{{ article.title }}</h4>
     <p class="small-summary">{{ article.description }}</p>
     <AppButton

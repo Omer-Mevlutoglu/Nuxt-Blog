@@ -1,9 +1,15 @@
 <template>
   <article class="slider-card">
     <div class="post-img">
-      <img v-if="article.image" :src="article.image" :alt="article.title" >
-      <!-- Keep the link overlay (without an icon) -->
-      <NuxtLink :to="article.path" class="over-layer" />
+      <NuxtImg
+        v-if="article.image"
+        :src="article.image"
+        :alt="article.title"
+        preload
+        loading="lazy">
+        <!-- Keep the link overlay (without an icon) -->
+        <NuxtLink :to="article.path" class="over-layer" />
+      </NuxtImg>
     </div>
     <div class="post-content">
       <div class="tag-area">

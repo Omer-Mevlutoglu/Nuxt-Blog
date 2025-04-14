@@ -1,5 +1,43 @@
 <script setup lang="ts">
 import { useTrendingStore } from "~/src/store/trending.store";
+import { useDebounce } from "@vueuse/core";
+const CardLarge = defineAsyncComponent(
+  () => import("~/src/components/molecules/CardLarge.vue")
+);
+const SearchFilter = defineAsyncComponent(
+  () => import("~/src/components/molecules/SearchFilter.vue")
+);
+const TagFilter = defineAsyncComponent(
+  () => import("~/src/components/molecules/TagFilter.vue")
+);
+const PaginationControls = defineAsyncComponent(
+  () => import("~/src/components/molecules/PaginationControls.vue")
+);
+useHead({
+  title: "Trending Articles - My Nuxt Blog",
+  meta: [
+    {
+      name: "description",
+      content:
+        "Explore the latest trending articles on My Nuxt Blog. Stay updated with top news, sports insights, and featured stories.",
+    },
+    {
+      name: "keywords",
+      content: "trending, articles, blog, news, sports, featured",
+    },
+    { property: "og:title", content: "Trending Articles - My Nuxt Blog" },
+    {
+      property: "og:description",
+      content:
+        "Discover the most popular trending articles on My Nuxt Blog. Get the latest updates on news, sports, and more.",
+    },
+    { property: "og:type", content: "website" },
+    { property: "og:image", content: "/images/lefr-1.webp" },
+    { property: "og:url", content: "http://localhost:3000/en/trending" },
+    { property: "og:site_name", content: "My Nuxt Blog" },
+    { property: "og:locale", content: "en_US" },
+  ],
+});
 
 const trendingStore = useTrendingStore();
 
@@ -9,6 +47,7 @@ if (!trendingStore.trendingArticles.length && !trendingStore.loading) {
 
 const selectedTag = ref("All");
 const searchTerm = ref("");
+const debouncedSearchTerm = useDebounce(searchTerm, 300);
 
 const availableTags = computed(() => {
   const tagsSet = new Set<string>();
@@ -19,25 +58,22 @@ const availableTags = computed(() => {
   });
   return ["All", ...Array.from(tagsSet)];
 });
-
 const filteredArticles = computed(() => {
   let articles = trendingStore.trendingArticles;
-
   if (selectedTag.value && selectedTag.value !== "All") {
     articles = articles.filter((article) =>
       article.tags?.includes(selectedTag.value)
     );
   }
-
-  if (searchTerm.value?.trim()) {
-    const term = searchTerm.value.toLowerCase();
+  if (debouncedSearchTerm.value?.trim()) {
+    const term = debouncedSearchTerm.value.toLowerCase();
     articles = articles.filter(
       (article) =>
         article.title.toLowerCase().includes(term) ||
+        article.description.toLowerCase().includes(term) ||
         article.body.toLowerCase().includes(term)
     );
   }
-
   return articles;
 });
 
@@ -152,9 +188,7 @@ watch(currentPage, () => {
     margin-bottom: 2rem;
     text-align: center;
     color: $color-text-primary;
-    // transform: translateY(20px);
     opacity: 1;
-    // animation: slideDown 0.6s ease-out forwards;
   }
 
   .filter-section {
@@ -163,9 +197,7 @@ watch(currentPage, () => {
     justify-content: center;
     gap: 1rem;
     margin-bottom: 3rem;
-    // transform: translateY(20px);
     opacity: 1;
-    // animation: slideDown 0.6s ease-out forwards 0.2s;
   }
 
   .loading-indicator {
@@ -217,8 +249,6 @@ watch(currentPage, () => {
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 2rem;
     opacity: 1;
-    // transform: translateY(20px);
-    // animation: slideUp 0.6s ease-out forwards 0.4s;
     transition: all 0.5s ease-out;
 
     &.slide-left {
@@ -238,28 +268,6 @@ watch(currentPage, () => {
   }
   to {
     opacity: 1;
-  }
-}
-
-@keyframes slideDown {
-  from {
-    opacity: 0;
-    transform: translateY(-20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes slideUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
   }
 }
 

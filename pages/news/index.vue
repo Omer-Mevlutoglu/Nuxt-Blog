@@ -1,6 +1,33 @@
 <script setup lang="ts">
 import { useArticlesStore } from "~/src/store/articles.store";
 
+useHead({
+  title: "News Articles - My Nuxt Blog",
+  meta: [
+    {
+      name: "description",
+      content:
+        "Discover the latest news, updates, and insights on My Nuxt Blog. Stay informed with our curated selection of news articles and trending topics.",
+    },
+    {
+      name: "keywords",
+      content: "news, articles, blog, updates, trending, insights",
+    },
+    { property: "og:title", content: "News Articles - My Nuxt Blog" },
+    {
+      property: "og:description",
+      content:
+        "Stay informed with our latest news and updates on My Nuxt Blog, featuring a curated selection of articles on trending topics.",
+    },
+    { property: "og:type", content: "website" },
+    { property: "og:image", content: "/images/lefr-1.webp" },
+    { property: "og:url", content: "http://localhost:3000/en/news" },
+    { property: "og:site_name", content: "My Nuxt Blog" },
+    { property: "og:locale", content: "en_US" },
+    { property: "og:locale:alternate", content: "tr_TR" },
+  ],
+});
+
 const articlesStore = useArticlesStore();
 const { locale } = useI18n();
 

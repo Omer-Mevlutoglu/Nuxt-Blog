@@ -1,16 +1,17 @@
 <template>
   <article class="card card-hero">
     <div class="hero-img-wrapper">
-      <img
+      <NuxtImg 
         v-if="article.image"
         :src="article.image"
         :alt="article.title"
         class="hero-img"
+        loading="lazy"
+        preload 
       >
       <div class="image-overlay" />
-    </div>
+    </nuxtimg></div>
     <div class="hero-content">
-      <!-- Tag list for the hero card -->
       <div class="tag-list">
         <span v-for="(tag, index) in article.tags" :key="index" class="tag">
           {{ tag }}
@@ -81,7 +82,7 @@ defineProps({
 
       .tag {
         font-size: 0.7rem;
-        background-color: rgba($color-primary, 0.1);  // use your primary color variable with transparency
+        background-color: rgba($color-primary, 0.1);
         color: $color-primary;
         padding: 0.2rem 0.5rem;
         border-radius: 9999px;
@@ -89,23 +90,23 @@ defineProps({
         font-weight: 500;
       }
     }
-  }
 
-  .hero-title {
-    font-size: 1.5rem;
-    font-weight: bold;
-    margin-bottom: 0.3rem;
-  }
+    .hero-title {
+      font-size: 1.5rem;
+      font-weight: bold;
+      margin-bottom: 0.3rem;
+    }
 
-  .hero-description {
-    font-size: 1rem;
-    color: $color-text-secondary;
-    margin-bottom: 0.8rem;
-  }
+    .hero-description {
+      font-size: 1rem;
+      color: $color-text-secondary;
+      margin-bottom: 0.8rem;
+    }
 
-  .hero-link {
-    font-weight: bold;
-    transition: text-decoration 0.3s ease;
+    .hero-link {
+      font-weight: bold;
+      transition: text-decoration 0.3s ease;
+    }
   }
 
   &:hover {
