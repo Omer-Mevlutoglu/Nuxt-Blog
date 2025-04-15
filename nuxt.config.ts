@@ -13,6 +13,12 @@ export default defineNuxtConfig({
     "@nuxt/icon",
     "@nuxtjs/i18n",
     "@pinia/nuxt",
+    [
+      "@nuxt-modules/compression",
+      {
+        algorithm: "brotliCompress",
+      },
+    ],
   ],
   i18n: {
     strategy: "prefix",
