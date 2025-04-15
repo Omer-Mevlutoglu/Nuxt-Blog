@@ -2,146 +2,230 @@
 
 A modern, feature-rich blog platform built with Nuxt 3, TypeScript, and Vue 3, supporting multiple languages and offering a rich user experience.
 
+---
+
+## 🚀 Live Demo
+
+Check out the live demo of the blog at:  
+[https://nuxt-blog-phi-rose.vercel.app/en](https://nuxt-blog-phi-rose.vercel.app/en)
+
+
 ## 🚀 Features
 
-- **Multilingual Support** (English and Turkish)
-- **Content Management** with Nuxt Content
-- **Dynamic Routing** for articles and trending posts
-- **Responsive Design** with SCSS
-- **State Management** using Pinia
-- **Component Architecture** following Atomic Design principles
-- **SEO Optimized** with meta tags and dynamic head management
-- **Image Optimization** with Nuxt Image
-- **Performance Optimized** with lazy loading and dynamic imports
-- **Testing Suite** with Vitest and Cypress
+- **Multilingual Support:**  
+  Supports multiple languages (English and Turkish) using URL prefixes (e.g., `/en/*` and `/tr/*`).
+
+- **Content Management:**  
+  Leverages Nuxt Content to manage Markdown-based blog posts with rich front matter (tags, images, slugs, etc.) and dynamic content rendering.
+
+- **Dynamic Routing:**  
+  Implements dynamic routes for articles via `[slug].vue` and trending posts via `[id].vue`.
+
+- **Responsive Design:**  
+  Uses SCSS and CSS Grid/Flexbox to provide a responsive layout that adjusts for large, medium, and mobile screens.
+
+- **State Management:**  
+  Centralized state management with Pinia for managing articles and trending content.
+
+- **SEO Optimization:**  
+  Uses `useHead` to dynamically set page titles and meta tags, along with optimized image handling with Nuxt Image.
+
+- **Performance Optimization:**  
+  Utilizes lazy loading, dynamic imports, code splitting, and image optimization to minimize JS payload and main thread work.
+
+- **Testing Suite:**  
+  Supports end-to-end testing with Cypress and unit testing with Vitest (plus @nuxt/test-utils).
+
+---
 
 ## 🛠️ Technologies
 
-- Nuxt.js 3
-- Vue.js 3
-- TypeScript
-- Pinia for state management
-- SCSS for styling
-- i18n for internationalization
-- Vue 3 Carousel
-- Cypress for E2E testing
-- Vitest for unit testing
+- **Nuxt.js 3** – The core framework for building our application  
+- **Vue 3** – Component-based UI construction with Composition API  
+- **TypeScript** – Ensures type safety and maintainability  
+- **Pinia** – State management  
+- **SCSS** – Styling and animations  
+- **Nuxt Content** – Markdown-based content management  
+- **Vue I18n** – Internationalization support  
+- **VueUse** – Composition utilities  
+- **Nuxt Image** – Image optimization  
+- **Cypress** – End-to-end testing  
+- **Vitest** – Unit testing  
+- **@nuxt/test-utils** – Nuxt-specific testing utilities  
+
+---
 
 ## 📋 Prerequisites
 
-- Node.js (v16 or newer)
-- npm or yarn
-- Git
+- **Node.js:** Latest LTS version (v16 or newer recommended)  
+- **Package Manager:** npm, yarn, or pnpm  
+- **Git:** For version control  
+
+---
 
 ## 🚦 Getting Started
 
-1. **Clone the repository**
+1. **Clone the Repository**
 
    ```bash
    git clone [repository-url]
    cd blog
    ```
 
-2. **Install dependencies**
+2. **Install Dependencies**
 
    ```bash
    npm install
    ```
 
-3. **Run development server**
+3. **Run Development Server**
 
    ```bash
    npm run dev
    ```
 
-4. **Build for production**
+4. **Build for Production**
+
    ```bash
    npm run build
    ```
+
+5. **Preview the Production Build**
+
+   ```bash
+   npm run preview
+   ```
+
+---
 
 ## 📁 Project Structure
 
 ```
 ├── assets/            # SCSS files and other assets
-├── content/          # Markdown content files
-│   └── news/         # News articles in multiple languages
-├── cypress/          # E2E tests
-├── i18n/             # Internationalization files
-├── pages/            # Application routes
-├── public/           # Static files
+├── content/           # Markdown content files (blog posts, articles)
+│   └── news/          # News articles in multiple languages
+├── cypress/           # End-to-end tests using Cypress
+├── i18n/              # Localization files (e.g., en.json, tr.json)
+├── pages/             # Application routes (including dynamic routes)
+├── public/            # Static files (robots.txt, sitemap.xml, .htaccess, humans.txt, favicons)
 └── src/
-    ├── components/   # Vue components (Atomic Design)
-    │   ├── atoms/
-    │   ├── molecules/
-    │   └── organisms/
-    ├── composable/   # Vue composables
-    ├── store/        # Pinia stores
-    └── types/        # TypeScript types
+    ├── components/    # Vue components organized by atoms, molecules, organisms, templates
+    ├── composable/    # Vue composables
+    ├── store/         # Pinia stores for state management
+    └── types/         # TypeScript types
 ```
+
+---
 
 ## 🧪 Testing
 
-### Unit Tests
+### Unit Testing with Vitest
 
-```bash
-npm run test
-```
+- **Setup:**  
+  Ensure you have the following dev dependencies installed: `vitest`, `@vue/test-utils`, `happy-dom`, and optionally `@vitejs/plugin-vue`.
 
-### E2E Tests
+- **Configuration:**  
+  Create a `vitest.config.ts` file (if not already present) using:
 
-```bash
-npm run cy:open
-```
+  ```ts
+  // vitest.config.ts
+  import { defineVitestConfig } from '@nuxt/test-utils/config'
+  export default defineVitestConfig({
+    test: {
+      environment: 'nuxt',
+    }
+  })
+  ```
+
+- **Run Unit Tests:**
+
+  ```bash
+  npm run test
+  ```
+
+### End-to-End Testing with Cypress
+
+- **Run E2E Tests:**
+
+  ```bash
+  npm run cy:open
+  ```
+
+- **Testing Strategy:**  
+  Write tests covering key user flows such as:
+  - Navigating to various pages (Home, Blog, Article detail)
+  - Changing the language via the language switcher
+  - Filtering articles by tag and searching for articles
+  - Submitting forms (if applicable)
+  
+Refer to the [Nuxt Test Utils documentation](https://nuxt.com/docs/getting-started/testing) for more details.
+
+---
 
 ## 🌐 Internationalization
 
-The blog supports multiple languages with URL prefix strategy:
+- **URL Strategy:**  
+  URL paths include language prefixes (e.g., `/en/*`, `/tr/*`).
+  
+- **Setup:**  
+  Localization files are stored in the `locales/` folder, and the i18n module is configured in `nuxt.config.ts`.  
+  To add new languages, simply update the locales array and add corresponding JSON files.
 
-- English: `/en/*`
-- Turkish: `/tr/*`
-
-Content is managed through markdown files in the `content/news/` directory with language-specific variants.
+---
 
 ## 🔧 Configuration
 
-- `nuxt.config.ts` - Main Nuxt configuration
-- `content.config.ts` - Content module configuration
-- `vitest.config.ts` - Testing configuration
-- `cypress.config.ts` - E2E testing configuration
+- **Nuxt Config:**  
+  Configure your application's Nuxt settings in `nuxt.config.ts`, including global CSS, plugins, modules, and i18n options.
 
-## 📱 Features Breakdown
+- **Content Config:**  
+  Use `content.config.ts` to define your Nuxt Content schema and processing rules.
 
-### Content Management
+- **Testing Config:**  
+  Configure Vitest and Cypress in `vitest.config.ts` and `cypress.config.ts` respectively.
 
-- Markdown-based content with front matter
-- Support for multiple languages
-- Tag-based categorization
-- Image optimization
+- **Static Assets:**  
+  Place your `robots.txt`, `sitemap.xml`, `.htaccess`, `humans.txt`, and favicon files in the `public/` folder.
 
-### User Interface
+---
 
-- Responsive design
-- Dynamic article loading
-- Carousel for featured content
-- Tag-based filtering
-- Search functionality
-- Pagination controls
+## ⚡ Performance Optimization
 
-### Performance
+- **Lazy Loading & Dynamic Imports:**  
+  Use lazy loading (e.g., `Suspense` and `defineAsyncComponent`) to reduce the initial JS bundle size and delay loading of non-critical components.
 
-- Lazy loading of components
-- Image optimization
-- Brotli compression
-- Component-level code splitting
+- **Image Optimization:**  
+  Leverage Nuxt Image module for optimized images. Use lazy-loading attributes on images.
+
+- **Code Splitting:**  
+  Use dynamic imports for heavy components, such as sliders or modals, to improve the Time to Interactive.
+
+- **Minimizing Main-Thread Work:**  
+  Optimize scripts, avoid heavy reactivity where not needed, and offload computations with computed properties.
+
+- **Brotli & Compression:**  
+  Enable Brotli or gzip compression on your server to reduce payload sizes.
+
+---
+
+## 🚀 Deployment
+
+- **Deployment Options:**  
+  The app can be deployed to any hosting provider that supports Node.js. Popular options include Vercel, Netlify, and AWS.
+  
+- **Environment Variables:**  
+  Configure any necessary environment variables for API endpoints and i18n in a `.env` file.
+
+---
 
 ## 🤝 Contributing
 
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
+1. **Fork the Repository**
+2. **Create a Feature Branch:** `git checkout -b feature/AmazingFeature`
+3. **Commit Your Changes:** `git commit -m 'Add some AmazingFeature'`
+4. **Push to Your Branch:** `git push origin feature/AmazingFeature`
+5. **Open a Pull Request**
 
-## 📄 License
+Please follow the code style guidelines and add/update tests as necessary.
 
-This project is licensed under the MIT License - see the LICENSE file for details.
+
