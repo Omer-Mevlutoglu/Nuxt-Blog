@@ -5,4 +5,5 @@ export interface Article {
   image?: string; // also optional if needed
   date: string; // or Date if you convert it
   locale?: string;
+  slug: string;
 }

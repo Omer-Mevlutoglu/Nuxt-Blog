@@ -6,10 +6,10 @@
       <div class="left-column">
         <CardLarge
           v-for="article in leftArticles"
-          :key="article.id"
+          :key="article.slug"
           :article="{
             ...article,
-            description: article.description.substring(0, 60) + '.....',
+            description: article.description?.substring(0, 60) + '.....',
           }"
         />
       </div>
@@ -21,7 +21,7 @@
       <div class="right-column">
         <CardSmall
           v-for="article in rightArticles"
-          :key="article.id"
+          :key="article.slug"
           :article="article"
         />
       </div>
@@ -66,13 +66,13 @@ const rightArticles = computed(() => newsArticles.value.slice(2, 6));
 .hero-section {
   padding: 2rem 0;
   position: relative;
-  
+
   .hero-grid {
     display: grid;
-    grid-template-columns: 2fr 3fr 2fr; 
+    grid-template-columns: 2fr 3fr 2fr;
     gap: 1.5rem;
   }
-  
+
   .loader {
     position: absolute;
     top: 50%;
@@ -85,7 +85,11 @@ const rightArticles = computed(() => newsArticles.value.slice(2, 6));
     color: $color-text-secondary;
     z-index: 10;
   }
-  
+  .left-column {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
   /* Medium screens: left & middle full width, right below */
   @media screen and (max-width: 1024px) and (min-width: 769px) {
     .hero-grid {
@@ -110,7 +114,7 @@ const rightArticles = computed(() => newsArticles.value.slice(2, 6));
       gap: 1rem;
     }
   }
-  
+
   /* Mobile screens: each column full width */
   @media screen and (max-width: 768px) {
     .hero-grid {
