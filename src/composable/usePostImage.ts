@@ -1,7 +1,7 @@
 export const usePostImage = () => {
   const getPostImage = (postId: number) => {
     const imageIndex = postId % 9;
-    return `/images/trending/${imageIndex}.webp`;
+    return `/images/${imageIndex}.webp`;
   };
 
   return {

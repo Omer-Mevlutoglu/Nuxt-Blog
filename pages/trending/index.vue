@@ -80,7 +80,7 @@ const filteredArticles = computed(() => {
 const getSequentialImage = (index: number) => {
   const imageCount = 9;
   const imageIndex = (index % imageCount) + 1;
-  return `/images/trending/${imageIndex}.webp`;
+  return `/images/${imageIndex}.webp`;
 };
 
 const currentPage = ref(1);
